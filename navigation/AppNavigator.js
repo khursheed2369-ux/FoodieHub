@@ -13,6 +13,7 @@ import LoginScreen from '../screens/LoginScreen';
 import SignupScreen from '../screens/SignupScreen';
 import HomeScreen from '../screens/HomeScreen';
 import DetailScreen from '../screens/DetailScreen';
+import FavoritesScreen from '../screens/FavoritesScreen';
 
 
 const Stack = createNativeStackNavigator();
@@ -49,6 +50,12 @@ export default function AppNavigator() {
         <Stack.Screen
           name="Detail"
           component={DetailScreen}
+        />
+
+
+        <Stack.Screen
+          name="Favorites"
+          component={FavoritesScreen}
         />
 
       </Stack.Navigator>
