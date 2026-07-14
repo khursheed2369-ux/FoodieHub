@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {
   View,
@@ -11,9 +11,43 @@ import {
 
 import recipes from '../data/recipes.js';
 
+import { fetchRecipes } from '../services/api';
+
 
 
 export default function HomeScreen({ navigation }) {
+
+
+  const [apiRecipes, setApiRecipes] = useState([]);
+
+
+
+  useEffect(() => {
+
+    loadApiRecipes();
+
+  }, []);
+
+
+
+
+  const loadApiRecipes = async () => {
+
+    const data = await fetchRecipes();
+
+    setApiRecipes(data);
+
+  };
+
+
+
+
+  const displayRecipes =
+    apiRecipes.length > 0
+      ? apiRecipes
+      : recipes;
+
+
 
 
   return (
@@ -32,18 +66,25 @@ export default function HomeScreen({ navigation }) {
 
 
 
+
       <FlatList
 
-        data={recipes}
+        data={displayRecipes}
 
-        keyExtractor={(item) => item.id}
+
+        keyExtractor={(item, index) =>
+          item.id || item.idMeal || index.toString()
+        }
+
 
 
         renderItem={({ item }) => (
 
+
           <TouchableOpacity
 
             style={styles.card}
+
 
             onPress={() =>
               navigation.navigate(
@@ -56,26 +97,56 @@ export default function HomeScreen({ navigation }) {
 
           >
 
+
             <Text style={styles.recipeName}>
-              {item.name}
+
+              {
+                item.name ||
+                item.strMeal
+              }
+
             </Text>
+
 
 
             <Text>
-              Category: {item.category}
+
+              Category:
+
+              {
+                item.category ||
+                item.strCategory ||
+                "Food"
+
+              }
+
             </Text>
+
+
 
 
             <Text>
-              Cooking Time: {item.time}
+
+              Cooking Time:
+
+              {
+                item.time ||
+                "Not available"
+
+              }
+
             </Text>
+
 
 
           </TouchableOpacity>
 
+
         )}
 
+
       />
+
 
 
     </View>
@@ -89,11 +160,13 @@ export default function HomeScreen({ navigation }) {
 
 const styles = StyleSheet.create({
 
+
   container: {
     flex: 1,
     padding: 20,
     backgroundColor: '#F5F5F5',
   },
+
 
 
   title: {
@@ -104,11 +177,13 @@ const styles = StyleSheet.create({
   },
 
 
+
   subtitle: {
     fontSize: 18,
     color: '#555',
     marginBottom: 20,
   },
+
 
 
   card: {
@@ -117,6 +192,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     borderRadius: 10,
   },
+
 
 
   recipeName: {
