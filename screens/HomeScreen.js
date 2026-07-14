@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {
   View,
   Text,
@@ -7,77 +8,82 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-const recipes = [
-  {
-    id: '1',
-    name: 'Pasta Primavera',
-    category: 'Italian',
-    time: '30 mins',
-  },
-  {
-    id: '2',
-    name: 'Chicken Curry',
-    category: 'Indian',
-    time: '45 mins',
-  },
-  {
-    id: '3',
-    name: 'Vegetable Salad',
-    category: 'Healthy',
-    time: '15 mins',
-  },
-  {
-    id: '4',
-    name: 'Chocolate Cake',
-    category: 'Dessert',
-    time: '60 mins',
-  },
-];
+
+import recipes from '../data/recipes.js';
+
 
 
 export default function HomeScreen({ navigation }) {
 
-  const renderRecipe = ({ item }) => (
-    <TouchableOpacity
-      style={styles.card}
-      onPress={() => navigation.navigate('Detail', {
-        recipe: item,
-      })}
-    >
-
-      <Text style={styles.recipeName}>
-        {item.name}
-      </Text>
-
-      <Text style={styles.category}>
-        Category: {item.category}
-      </Text>
-
-      <Text style={styles.time}>
-        Cooking Time: {item.time}
-      </Text>
-
-    </TouchableOpacity>
-  );
-
 
   return (
+
     <View style={styles.container}>
 
+
       <Text style={styles.title}>
-        🍲 FoodieHub Recipes
+        Welcome to FoodieHub
       </Text>
+
+
+      <Text style={styles.subtitle}>
+        Discover Delicious Recipes 🍽️
+      </Text>
+
 
 
       <FlatList
+
         data={recipes}
-        renderItem={renderRecipe}
+
         keyExtractor={(item) => item.id}
+
+
+        renderItem={({ item }) => (
+
+          <TouchableOpacity
+
+            style={styles.card}
+
+            onPress={() =>
+              navigation.navigate(
+                'Detail',
+                {
+                  recipe: item
+                }
+              )
+            }
+
+          >
+
+            <Text style={styles.recipeName}>
+              {item.name}
+            </Text>
+
+
+            <Text>
+              Category: {item.category}
+            </Text>
+
+
+            <Text>
+              Cooking Time: {item.time}
+            </Text>
+
+
+          </TouchableOpacity>
+
+        )}
+
       />
 
+
     </View>
+
   );
+
 }
+
 
 
 
@@ -91,37 +97,33 @@ const styles = StyleSheet.create({
 
 
   title: {
-    fontSize: 26,
+    fontSize: 28,
     fontWeight: 'bold',
-    marginBottom: 20,
     color: '#4CAF50',
+    marginBottom: 10,
+  },
+
+
+  subtitle: {
+    fontSize: 18,
+    color: '#555',
+    marginBottom: 20,
   },
 
 
   card: {
     backgroundColor: '#fff',
-    padding: 20,
-    borderRadius: 10,
+    padding: 15,
     marginBottom: 15,
-    elevation: 3,
+    borderRadius: 10,
   },
 
 
   recipeName: {
     fontSize: 20,
     fontWeight: 'bold',
+    marginBottom: 8,
   },
 
-
-  category: {
-    marginTop: 8,
-    color: '#555',
-  },
-
-
-  time: {
-    marginTop: 5,
-    color: '#777',
-  },
 
 });
