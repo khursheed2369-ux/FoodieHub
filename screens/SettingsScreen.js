@@ -9,6 +9,9 @@ import {
 } from 'react-native';
 
 
+import { sendTestNotification } from '../services/notification';
+
+
 
 export default function SettingsScreen() {
 
@@ -16,6 +19,14 @@ export default function SettingsScreen() {
   const [notifications, setNotifications] = useState(true);
 
   const [darkMode, setDarkMode] = useState(false);
+
+
+
+  const handleNotification = async () => {
+
+    await sendTestNotification();
+
+  };
 
 
 
@@ -27,6 +38,7 @@ export default function SettingsScreen() {
       <Text style={styles.title}>
         Settings
       </Text>
+
 
 
 
@@ -42,14 +54,13 @@ export default function SettingsScreen() {
 
           value={notifications}
 
-          onValueChange={
-            setNotifications
-          }
+          onValueChange={setNotifications}
 
         />
 
 
       </View>
+
 
 
 
@@ -66,14 +77,32 @@ export default function SettingsScreen() {
 
           value={darkMode}
 
-          onValueChange={
-            setDarkMode
-          }
+          onValueChange={setDarkMode}
 
         />
 
 
       </View>
+
+
+
+
+
+      <TouchableOpacity
+
+        style={styles.button}
+
+        onPress={handleNotification}
+
+      >
+
+        <Text style={styles.buttonText}>
+          Test Notification
+        </Text>
+
+
+      </TouchableOpacity>
+
 
 
 
@@ -91,23 +120,12 @@ export default function SettingsScreen() {
 
 
 
-      <TouchableOpacity style={styles.option}>
-
-
-        <Text style={styles.text}>
-          Privacy Policy
-        </Text>
-
-
-      </TouchableOpacity>
-
-
-
     </View>
 
   );
 
 }
+
 
 
 
@@ -122,7 +140,6 @@ const styles = StyleSheet.create({
   },
 
 
-
   title: {
     fontSize: 30,
     fontWeight: 'bold',
@@ -130,9 +147,8 @@ const styles = StyleSheet.create({
   },
 
 
-
   option: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#fff',
     padding: 18,
     borderRadius: 10,
     marginBottom: 15,
@@ -142,9 +158,24 @@ const styles = StyleSheet.create({
   },
 
 
-
   text: {
     fontSize: 18,
+  },
+
+
+  button: {
+    backgroundColor: '#4CAF50',
+    padding: 18,
+    borderRadius: 10,
+    marginBottom: 15,
+    alignItems: 'center',
+  },
+
+
+  buttonText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
   },
 
 
