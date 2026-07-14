@@ -13,26 +13,33 @@ import LoginScreen from '../screens/LoginScreen';
 import SignupScreen from '../screens/SignupScreen';
 import HomeScreen from '../screens/HomeScreen';
 import DetailScreen from '../screens/DetailScreen';
-import FavoritesScreen from '../screens/FavoritesScreen';
+import SettingsScreen from '../screens/SettingsScreen';
+
 
 
 const Stack = createNativeStackNavigator();
 
 
+
 export default function AppNavigator() {
+
 
   return (
 
     <NavigationContainer>
 
+
       <Stack.Navigator
         initialRouteName="Login"
       >
+
+
 
         <Stack.Screen
           name="Login"
           component={LoginScreen}
         />
+
 
 
         <Stack.Screen
@@ -41,10 +48,12 @@ export default function AppNavigator() {
         />
 
 
+
         <Stack.Screen
           name="Home"
           component={HomeScreen}
         />
+
 
 
         <Stack.Screen
@@ -53,14 +62,19 @@ export default function AppNavigator() {
         />
 
 
+
         <Stack.Screen
-          name="Favorites"
-          component={FavoritesScreen}
+          name="Settings"
+          component={SettingsScreen}
         />
 
+
+
       </Stack.Navigator>
+
 
     </NavigationContainer>
 
   );
+
 }

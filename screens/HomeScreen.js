@@ -55,14 +55,43 @@ export default function HomeScreen({ navigation }) {
     <View style={styles.container}>
 
 
-      <Text style={styles.title}>
-        Welcome to FoodieHub
-      </Text>
+      <View style={styles.header}>
 
 
-      <Text style={styles.subtitle}>
-        Discover Delicious Recipes 🍽️
-      </Text>
+        <View>
+
+          <Text style={styles.title}>
+            Welcome to FoodieHub
+          </Text>
+
+
+          <Text style={styles.subtitle}>
+            Discover Delicious Recipes 🍽️
+          </Text>
+
+        </View>
+
+
+
+        <TouchableOpacity
+
+          style={styles.settingsButton}
+
+          onPress={() =>
+            navigation.navigate('Settings')
+          }
+
+        >
+
+          <Text style={styles.settingsText}>
+            ⚙️
+          </Text>
+
+        </TouchableOpacity>
+
+
+
+      </View>
 
 
 
@@ -73,7 +102,9 @@ export default function HomeScreen({ navigation }) {
 
 
         keyExtractor={(item, index) =>
-          item.id || item.idMeal || index.toString()
+          item.id ||
+          item.idMeal ||
+          index.toString()
         }
 
 
@@ -117,7 +148,6 @@ export default function HomeScreen({ navigation }) {
                 item.category ||
                 item.strCategory ||
                 "Food"
-
               }
 
             </Text>
@@ -132,7 +162,6 @@ export default function HomeScreen({ navigation }) {
               {
                 item.time ||
                 "Not available"
-
               }
 
             </Text>
@@ -169,11 +198,20 @@ const styles = StyleSheet.create({
 
 
 
+  header: {
+
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+
+  },
+
+
+
   title: {
     fontSize: 28,
     fontWeight: 'bold',
     color: '#4CAF50',
-    marginBottom: 10,
   },
 
 
@@ -182,6 +220,22 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: '#555',
     marginBottom: 20,
+  },
+
+
+
+  settingsButton: {
+
+    padding: 10,
+
+  },
+
+
+
+  settingsText: {
+
+    fontSize: 30,
+
   },
 
 
